@@ -16,7 +16,7 @@ import java.util.List;
 public class TypeDeVin {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Correction ici
     private Integer id;
 
     @Column(name = "nom")

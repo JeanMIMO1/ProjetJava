@@ -1,12 +1,4 @@
--- Création des tables
-
-CREATE TABLE IF NOT EXISTS appelation (
-    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    nom_appelation VARCHAR(100),
-    annee_creation INT,
-    lieu VARCHAR(100)
-);
-
+-- Table: cepage
 CREATE TABLE IF NOT EXISTS cepage (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(100),
@@ -24,13 +16,14 @@ CREATE TABLE IF NOT EXISTS cepage (
     descriptif VARCHAR(100)
 );
 
+-- Table: domaine_exploitation
 CREATE TABLE IF NOT EXISTS domaine_exploitation (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    nom_domaine VARCHAR(100),
-    localisation_domaine VARCHAR(100),
+    nom VARCHAR(100),
+    region VARCHAR(100),
     superficie DOUBLE,
-    annee_creation_domaine INT,
-    proprietaire_domaine VARCHAR(100),
+    date_de_creation INT,
+    proprietaire VARCHAR(100),
     type_production VARCHAR(100),
     volume_production_annuel DOUBLE,
     description TEXT,
@@ -38,13 +31,13 @@ CREATE TABLE IF NOT EXISTS domaine_exploitation (
     site_web VARCHAR(100)
 );
 
+-- Table: type_de_vin
 CREATE TABLE IF NOT EXISTS type_de_vin (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(100),
     couleur VARCHAR(100),
     millesime INT,
     teneur_alcool DOUBLE,
-    aromes TEXT,
     duree_garde INT,
     temperature_service DOUBLE,
     description TEXT,
@@ -57,6 +50,15 @@ CREATE TABLE IF NOT EXISTS type_de_vin (
     FOREIGN KEY (domaine_origine_id) REFERENCES domaine_exploitation(id)
 );
 
+-- Table: appelation
+CREATE TABLE IF NOT EXISTS appelation (
+    id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    nom_appelation VARCHAR(100),
+    annee_creation INT,
+    lieu VARCHAR(100)
+);
+
+-- Table: vin
 CREATE TABLE IF NOT EXISTS vin (
     id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nom VARCHAR(100),
@@ -71,3 +73,9 @@ CREATE TABLE IF NOT EXISTS vin (
     FOREIGN KEY (cepage_id) REFERENCES cepage(id)
 );
 
+-- Suppression des données existantes pour des raisons de test
+DELETE FROM vin WHERE id IN (1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+DELETE FROM type_de_vin WHERE id IN (1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+DELETE FROM appelation WHERE id IN (1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+DELETE FROM cepage WHERE id IN (1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+DELETE FROM domaine_exploitation WHERE id IN (1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
